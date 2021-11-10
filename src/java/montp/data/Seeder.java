@@ -1,7 +1,13 @@
 package montp.data;
 
+import montp.data.model.Person;
+import montp.data.model.Resource;
+import montp.data.model.ResourceType;
 import montp.data.model.security.Group;
 import montp.data.model.security.User;
+import montp.services.PersonService;
+import montp.services.ResourceTypeService;
+import montp.services.ResourceService;
 import montp.services.UserService;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +25,15 @@ public class Seeder {
     
     @Inject
     private UserService userService;
+
+    @Inject
+    private ResourceTypeService resourceTypeService;
+
+    @Inject
+    private ResourceService resourceService;
+
+    @Inject
+    private PersonService personService;
 
     @PersistenceContext
     private EntityManager em;
@@ -39,7 +54,16 @@ public class Seeder {
             groupes.add(groupAdmin);
             userAdmin.setGroups(groupes);
             userService.insert(userAdmin);
+
+            ResourceType resourceType = new ResourceType("Salle de réunion");
+            resourceTypeService.insert(resourceType);
+
+            Person person = new Person("Said", "Waskar", "saidWaskar");
+            personService.insert(person);
+
+            Resource resource = new Resource("Salle A3", resourceType);
+            resource.setResponsible(person);
+            resourceService.insert(resource);
         }
     }
-
 }

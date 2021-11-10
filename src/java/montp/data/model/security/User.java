@@ -7,14 +7,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "SECURITY_USER")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User extends GenericEntity {
 
     @Column(nullable = false, unique = true, length = 50)
-    private String userName;
-    @Column(columnDefinition = "TEXT")
-    private String password;
-    @Column(columnDefinition = "TEXT")
-    private String oldPassword;
+    protected String userName;
+    @Column(columnDefinition = "TEXT", length = 100)
+    protected String password;
+    @Column(columnDefinition = "TEXT", length = 100)
+    protected String oldPassword;
 
     @ManyToMany
     @JoinTable(name = "SECURITY_USER_GROUP",
