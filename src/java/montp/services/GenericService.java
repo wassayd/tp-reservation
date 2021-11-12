@@ -5,11 +5,14 @@ import montp.data.model.GenericEntity;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.List;
 
 public class GenericService<T extends GenericEntity, DAO extends GenericDAO<T>> {
 
     @Inject
     protected DAO dao;
+
+    public List<T> getAll() { return dao.getAll(); }
 
     public T get(long id) { return dao.get(id); }
 

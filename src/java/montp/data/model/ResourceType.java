@@ -1,9 +1,6 @@
 package montp.data.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +14,10 @@ public class ResourceType extends GenericEntity {
 
     @OneToMany(mappedBy = "type")
     private List<Resource> resources = new ArrayList<>();
+
+    @Column(nullable = true)
+    private Integer capacity = null;
+
 
     public ResourceType(String name) {
         this.name = name;
@@ -32,5 +33,26 @@ public class ResourceType extends GenericEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources(List<Resource> resources) {
+        this.resources = resources;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

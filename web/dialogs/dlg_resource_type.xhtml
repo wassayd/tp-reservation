@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <p:dialog widgetVar="dlgEditClub"
+              id="dlgEditClub"
+              header="#{editClubDialog.instance.id == null ? msg['club_new'] : editClubDialog.instance}"
+              modal="true"
+              closeOnEscape="true">
+        <h:form id="frmEditClub">
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel for="name" value="#{msg['club_name']}"/>
+                <p:inputText id="name" value="#{editClubDialog.instance.name}"
+                             required="true"
+                             requiredMessage="#{msg['club_name_required']}"
+                             validatorMessage="#{msg['club_name_invalid']}">
+                    <f:validateLength minimum="1"/>
+                </p:inputText>
+            </h:panelGrid>
+            <p:growl/>
+            <p:commandButton value="#{msg['app.save']}"
+                             action="#{editClubDialog.save}"
+                             oncomplete="if (!args.validationFailed) PF('dlgEditClub').hide()"
+                             update="@form,formDataTable:dataTable"/>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

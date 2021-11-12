@@ -14,4 +14,7 @@ public class ResourceTypeService extends GenericService<ResourceType, ResourceTy
         return dao.getResources();
     }
 
+    public boolean canDelete(ResourceType resourceType) {
+        return resourceType.getResources().size() == 0;
+    }
 }

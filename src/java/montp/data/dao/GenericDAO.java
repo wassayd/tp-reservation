@@ -5,6 +5,7 @@ import montp.data.model.GenericEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.List;
 
 public abstract class GenericDAO<T extends GenericEntity> {
 
@@ -21,6 +22,12 @@ public abstract class GenericDAO<T extends GenericEntity> {
 
     public T get(long id) {
         return em.find(instanceClass, id);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<T> getAll() {
+        return em.createQuery("SELECT e FROM "+instanceClass.getSimpleName()+" e")
+                .getResultList();
     }
 
     @Transactional

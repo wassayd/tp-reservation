@@ -14,6 +14,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.mail.MessagingException;
+import javax.ws.rs.Path;
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,7 +23,6 @@ import java.util.List;
 public class IndexView implements Serializable {
 
     @Inject private UserSession session;
-
     @Inject private UserService userService;
     @Inject private EMailer eMailer;
     @Inject private Messages messages;
