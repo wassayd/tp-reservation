@@ -3,25 +3,24 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <p:dialog widgetVar="dlgEditClub"
-              id="dlgEditClub"
-              header="#{editClubDialog.instance.id == null ? msg['club_new'] : editClubDialog.instance}"
+    <p:dialog widgetVar="dlgEditResourceType"
+              id="dlgEditResourceType"
+              header="#{resourceTypeDialog.instance.id == null ? msg['resourceType.add'] : resourceTypeDialog.instance}"
               modal="true"
               closeOnEscape="true">
-        <h:form id="frmEditClub">
+        <h:form id="frmEditClub" rendered="#{resourceTypeDialog.instance != null}">
             <h:panelGrid columns="2" cellpadding="5">
-                <p:outputLabel for="name" value="#{msg['club_name']}"/>
-                <p:inputText id="name" value="#{editClubDialog.instance.name}"
+                <p:outputLabel for="name" value="#{msg['resourceType.name']}"/>
+                <p:inputText id="name" value="#{resourceTypeDialog.instance.name}"
                              required="true"
-                             requiredMessage="#{msg['club_name_required']}"
-                             validatorMessage="#{msg['club_name_invalid']}">
-                    <f:validateLength minimum="1"/>
-                </p:inputText>
+                             requiredMessage="#{msg['resourceType.name_required']}"/>
+                <p:outputLabel for="capacity" value="#{msg['resourceType.capacity']}"/>
+                <p:inputText id="capacity" value="#{resourceTypeDialog.instance.capacity}"/>
             </h:panelGrid>
             <p:growl/>
             <p:commandButton value="#{msg['app.save']}"
-                             action="#{editClubDialog.save}"
-                             oncomplete="if (!args.validationFailed) PF('dlgEditClub').hide()"
+                             action="#{resourceTypeDialog.save}"
+                             oncomplete="if (!args.validationFailed) PF('dlgEditResourceType').hide()"
                              update="@form,formDataTable:dataTable"/>
         </h:form>
     </p:dialog>

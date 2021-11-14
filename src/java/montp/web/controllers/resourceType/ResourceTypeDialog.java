@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @ViewScoped
-@Named("resourceType")
+@Named("resourceTypeDialog")
 public class ResourceTypeDialog extends AbstractDialog<ResourceType, ResourceTypeDAO, ResourceTypeService> {
 
     @Override

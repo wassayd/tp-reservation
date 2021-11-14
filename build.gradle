@@ -40,7 +40,7 @@ sourceSets {
     }
 }
 
-ext.setProperty('payaraHome', "C:\\payara5");
+ext.setProperty('payaraHome', "/opt/payara5");
 ext.setProperty('asadminDir', "${payaraHome}${File.separator}bin");
 ext.setProperty('asadminFile', System.properties['os.name'].toLowerCase().contains('windows')? ['cmd', '/c', 'asadmin.bat']: './asadmin')
 

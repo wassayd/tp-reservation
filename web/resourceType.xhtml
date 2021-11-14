@@ -1,43 +1,61 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
+<?xml version='1.0' encoding='UTF-8' ?>
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="./layout.xhtml">
     <ui:define name="content">
-        <h2>#{resourceType.hello}</h2>
         <p:card>
             <f:facet name="title">#{msg['resourceType.list']}</f:facet>
-            <p:dataTable value="#{resourceType.resourceTypes}"
-                          var="resType"
-                          sortBy="#{resType.name}">
-                <p:column headerText="#{msg['resourceType.name']}">
-                    #{resType}
-                </p:column>
-                <p:column headerText="#{msg['resourceType.capacity']}">
-                    #{resType.capacity == null ? '-' : resType.capacity}
-                </p:column>
-                <p:column headerText="#{msg['resourceType.resourcesLength']}">
-                    #{resType.resources.size()}
-                </p:column>
-                <p:column headerText="#{msg['app.actions']}">
-                    <p:commandButton icon="fa fa-trash"
-                                     styleClass="dataTableActions"
-                                     title="#{msg['app.delete']}"
-                                     rendered="#{resourceType.canDelete(resType)}"
-                                     actionListener="#{resourceType.delete(resType)}"
-                                     update="@form"
-                                     process="@this">
-                        <p:confirm header="#{msg['app.delete']}"
-                                   message="#{msg['resourceType.delete']}"
-                                   icon="fa fa-question-circle"/>
-                    </p:commandButton>
-                </p:column>
-                <f:facet name="footer">
-                    <h:outputFormat value="#{msg['resourceType.count']}"><f:param value="#{resourceType.resourceTypes.size()}"/></h:outputFormat>
-                </f:facet>
-            </p:dataTable>
+            <h:form id="formDataTable">
+                <p:growl/>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:commandButton icon="fa fa-plus"
+                                     value="#{msg['resourceType.add']}"
+                                     actionListener="#{resourceTypeDialog.create(resourceTypeView)}"
+                                     update="dlgEditResourceType"
+                                     oncomplete="PF('dlgEditResourceType').show()"
+                                     process="@this"/>
+                </h:panelGrid>
+                <p:dataTable value="#{resourceTypeView.datas}"
+                             id="dataTable"
+                             var="resType"
+                             sortBy="#{resType.name}">
+                    <p:column headerText="#{msg['resourceType.name']}">
+                        <p:commandLink id="ajax"
+                                       update="@form,dlgEditResourceType"
+                                       action="#{resourceTypeView.modify(resType)}"
+                                       process="@this"
+                                       oncomplete="PF('dlgEditResourceType').show()"
+                        >
+                            <h:outputText value="#{resType}"/>
+                        </p:commandLink>
+                    </p:column>
+                    <p:column headerText="#{msg['resourceType.capacity']}">
+                        #{resType.capacity == null ? '-' : resType.capacity}
+                    </p:column>
+                    <p:column headerText="#{msg['resourceType.resourcesLength']}">
+                        #{resType.resources.size()}
+                    </p:column>
+                    <p:column headerText="#{msg['app.actions']}">
+                        <p:commandButton icon="fa fa-trash"
+                                         styleClass="dataTableActions"
+                                         title="#{msg['app.delete']}"
+                                         rendered="#{resourceTypeView.canDelete(resType)}"
+                                         actionListener="#{resourceTypeView.delete(resType)}"
+                                         update="@form"
+                                         process="@this">
+                            <p:confirm header="#{msg['app.delete']}"
+                                       message="#{msg['resourceType.delete']}"
+                                       icon="fa fa-question-circle"/>
+                        </p:commandButton>
+                    </p:column>
+                    <f:facet name="footer">
+                        <h:outputFormat value="#{msg['resourceType.count']}"><f:param value="#{resourceTypeView.datas.size()}"/></h:outputFormat>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
         </p:card>
+        <ui:include src="dialogs/dlg_resource_type.xhtml"/>
     </ui:define>
 </ui:composition>
-
