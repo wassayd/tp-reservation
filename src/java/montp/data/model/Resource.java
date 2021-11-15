@@ -37,19 +37,40 @@ public class Resource extends GenericEntity {
         this.name = name;
     }
 
-    public void setResponsible(Person responsible) {
-        this.responsible = responsible;
+    public ResourceType getType() {
+        return type;
     }
 
     public void setType(ResourceType type) {
         this.type = type;
     }
 
+    public Person getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(Person responsible) {
+        this.responsible = responsible;
+    }
+
+    public Person getReservedBy() {
+        return reservedBy;
+    }
+
     public void setReservedBy(Person reservedBy) {
         this.reservedBy = reservedBy;
     }
 
+    public Boolean getSharable() {
+        return isSharable;
+    }
+
     public void setSharable(Boolean sharable) {
         isSharable = sharable;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

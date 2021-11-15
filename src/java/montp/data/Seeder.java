@@ -61,9 +61,11 @@ public class Seeder {
             Person person = new Person("Said", "Waskar", "saidWaskar");
             personService.insert(person);
 
-            Resource resource = new Resource("Salle A3", resourceType);
-            resource.setResponsible(person);
-            resourceService.insert(resource);
+            for (int i = 0; i < 100; i++) {
+                Resource resource = new Resource("Salle A"+i , resourceType);
+                resourceService.insert(resource);
+                resource.setResponsible(person);
+            }
         }
     }
 }
