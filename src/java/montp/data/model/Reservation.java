@@ -10,7 +10,7 @@ import java.util.Date;
 @Table(name = "RESERVATION")
 public class Reservation extends GenericEntity {
     @ManyToOne()
-    private Person person;
+    private Person reservedBy;
 
     @ManyToOne()
     private Resource resource;
@@ -19,7 +19,7 @@ public class Reservation extends GenericEntity {
 
     private Date endDate;
 
-    private Integer nbShareable;
+    private Integer nbShareable; // nombre de personne liées
 
     public Reservation() {
 
@@ -50,11 +50,11 @@ public class Reservation extends GenericEntity {
     }
 
     public Person getPerson() {
-        return person;
+        return reservedBy;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPerson(Person reservedBy) {
+        this.reservedBy = reservedBy;
     }
 
     public Integer getNbShareable() {

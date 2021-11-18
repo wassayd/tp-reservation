@@ -36,6 +36,11 @@ public abstract class GenericDAO<T extends GenericEntity> {
         em.flush();
     }
 
+    public Long count() {
+        return (Long) em.createQuery("SELECT COUNT(DISTINCT e) FROM "+instanceClass.getSimpleName()+" e")
+                .getSingleResult();
+    }
+
     @Transactional
     public void update(T instance) {
         em.merge(instance);

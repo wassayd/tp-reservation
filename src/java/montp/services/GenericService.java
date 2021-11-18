@@ -25,6 +25,10 @@ public class GenericService<T extends GenericEntity, DAO extends GenericDAO<T>> 
     @Transactional
     public void delete(T instance) { dao.delete(instance); }
 
+    public Long count() {
+        return dao.count();
+    }
+
     public boolean canDelete(T instance) { return dao.canDelete(instance); }
 
 }

@@ -1,7 +1,9 @@
 package montp.data.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "RESOURCE")
@@ -15,10 +17,10 @@ public class Resource extends GenericEntity {
     @ManyToOne()
     private Person responsible;
 
-    @ManyToOne
-    private Person reservedBy;
-
     private Boolean isSharable = false;
+
+    @OneToMany(mappedBy = "resource")
+    private List<Reservation> reservations = new ArrayList<>();
 
     public Resource(String name, ResourceType type) {
         this.name = name;
@@ -53,20 +55,20 @@ public class Resource extends GenericEntity {
         this.responsible = responsible;
     }
 
-    public Person getReservedBy() {
-        return reservedBy;
-    }
-
-    public void setReservedBy(Person reservedBy) {
-        this.reservedBy = reservedBy;
-    }
-
     public Boolean getSharable() {
         return isSharable;
     }
 
     public void setSharable(Boolean sharable) {
         isSharable = sharable;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     @Override

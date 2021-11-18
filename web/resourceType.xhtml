@@ -17,8 +17,12 @@
                                      oncomplete="PF('dlgEditResourceType').show()"
                                      process="@this"/>
                 </h:panelGrid>
-                <p:dataTable value="#{resourceTypeView.datas}"
+                <p:dataTable value="#{resourceTypeView.dataModel}"
                              id="dataTable"
+                             selectionMode="single"
+                             lazy="true"
+                             paginator="true"
+                             rows="5"
                              var="resType"
                              sortBy="#{resType.name}">
                     <p:column headerText="#{msg['resourceType.name']}">
@@ -28,7 +32,7 @@
                                        process="@this"
                                        oncomplete="PF('dlgEditResourceType').show()"
                         >
-                            <h:outputText value="#{resType}"/>
+                            <h:outputText value="#{resType.name}"/>
                         </p:commandLink>
                     </p:column>
                     <p:column headerText="#{msg['resourceType.capacity']}">

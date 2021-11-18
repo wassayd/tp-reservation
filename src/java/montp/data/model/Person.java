@@ -11,10 +11,9 @@ import java.util.List;
 public class Person extends User {
     private String firstname;
     private String lastName;
-    private String status;
 
     @OneToMany(mappedBy = "reservedBy", cascade = CascadeType.PERSIST)
-    private List<Resource> resources = new ArrayList<>();
+    private List<Reservation> reservations = new ArrayList<>();
 
     @OneToMany(mappedBy = "responsible", cascade = CascadeType.PERSIST)
     private List<Resource> responsibleOf = new ArrayList<>();
@@ -45,35 +44,19 @@ public class Person extends User {
         this.lastName = lastName;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public List<Resource> getResources() {
-        return resources;
-    }
-
-    public void setResources(List<Resource> resources) {
-        this.resources = resources;
-    }
-
-    public Person addResource(Resource resource) {
-        if (!this.resources.contains(resource)) {
-            this.resources.add(resource);
-        }
-
-        return this;
-    }
-
     public List<Resource> getResponsibleOf() {
         return responsibleOf;
     }
 
     public void setResponsibleOf(List<Resource> responsibleOf) {
         this.responsibleOf = responsibleOf;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

@@ -11,6 +11,14 @@
         <title>#{msg['app.title']}</title>
     </h:head>
     <h:body>
+        <header style="background-color: black; margin-bottom: 15px;padding: 10px">
+            <p:linkButton outcome="resourceType" style="margin-right: 5px">
+                #{msg['resourceType.list']}
+            </p:linkButton>
+            <p:linkButton outcome="resource_list">
+                #{msg['resource.list']}
+            </p:linkButton>
+        </header>
         <p:confirmDialog global="true">
             <p:commandButton value="Oui"
                              type="button"

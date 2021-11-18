@@ -35,5 +35,8 @@ public abstract class AbstractCrud<T extends GenericEntity, DAO extends GenericD
 
     public void setInstance(T instance) {
         this.instance = instance;
+        if (instance == null) {
+            instanciate();
+        }
     }
 }
